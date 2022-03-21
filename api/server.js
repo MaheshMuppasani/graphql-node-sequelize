@@ -17,13 +17,14 @@ const apolloServer = new ApolloServer({
   playground: {
     settings: {
       'schema.polling.enable': false,
-      'editor.fontSize': 18,
+      // 'editor.fontSize': 18,
     },
   },
 });
+apolloServer.start().then(()=>{
+  apolloServer.applyMiddleware({ app, path: '/api' })
+});
 
-apolloServer.applyMiddleware({ app, path: '/api' });
-
-const server = createServer(app);
+const server =  createServer(app);
 
 module.exports = server;
